@@ -3,25 +3,112 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
+    --date-color: #0d0d0d;
+    --todo-color: #697f8c;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+        --date-color: #ededed;
+        --todo-color: #c1d6d9;
+    }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+.todo-by-month .react-calendar {
+    width: 100%;
+    max-width: 1000px; /* 최대 너비를 늘림 */
+    aspect-ratio: 16 / 9; /* 가로 세로 비율을 16:9로 변경 */
+    margin: 0 auto;
+    background: white;
+    border: 1px solid #a0a096;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+}
+.todo-by-month .react-calendar__tile {
+    padding: 2em 0.5em; /* 패딩을 더 늘림 */
+    height: 120px; /* 높이를 늘림 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.todo-by-month .react-calendar__tile > abbr {
+    flex-shrink: 0;
+    font-size: 1em; /* 날짜 글자 크기 조정 */
+    margin-bottom: 0.5em; /* 날짜와 할 일 목록 사이 간격 추가 */
+    color: var(--date-color);
+    font-weight: bold;
+}
+.todo-by-month .react-calendar__tile > div {
+    flex-grow: 1;
+    overflow: hidden;
+    font-size: 0.8em; /* 할 일 글자 크기 조정 */
+    color: var(--todo-color);
+}
+.todo-by-month .react-calendar__month-view__days__day {
+    font-size: 1em; /* 글자 크기 조정 */
+}
+.todo-by-month .react-calendar__navigation {
+    height: 70px; /* 네비게이션 높이 증가 */
+    margin-bottom: 2em;
+}
+.todo-by-month .react-calendar__navigation button {
+    min-width: 60px;
+    background: none;
+    font-size: 1.6em; /* 글자 크기 증가 */
+    font-weight: bold;
+    color: var(--date-color);
+}
+.todo-by-month .react-calendar__navigation__label {
+    font-size: 1.6em; /* 글자 크기 증가 */
+    font-weight: bold;
+    color: var(--date-color);
+}
+.todo-by-month .react-calendar__navigation__arrow {
+    font-size: 2em; /* 화살표 크기 증가 */
+}
+@media (max-width: 640px) {
+    .todo-by-month .react-calendar__tile {
+        padding: 1.5em 0.2em;
+        height: 100px;
+    }
+    .todo-by-month .react-calendar__month-view__days__day {
+        font-size: 0.9em;
+    }
+    .todo-by-month .react-calendar__navigation {
+        height: 60px;
+    }
+    .todo-by-month .react-calendar__navigation button {
+        min-width: 50px;
+        font-size: 1.4em;
+    }
+}
+
+.todo-by-month .react-calendar__tile > div::-webkit-scrollbar {
+    width: 4px;
+}
+
+.todo-by-month .react-calendar__tile > div::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+}
+
+.todo-by-month .react-calendar__tile > div::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
 }
